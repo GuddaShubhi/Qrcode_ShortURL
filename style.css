@@ -1,0 +1,60 @@
+#header{
+    background-color: rgb(96, 48, 132);
+}
+
+#header .header1 img{
+    width: 7rem;
+    height: 3.5rem;
+}
+
+#header .header2 h3{
+    color: white;
+}
+
+
+/* #qr_code{
+    background-color: #fff2f0;
+} */
+
+#qr_code .container{
+    background-color: white;
+    width: 80%;
+}
+
+
+#qr_code .download{
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    margin-left: 10px;
+}
+
+#qr_code .copy{
+    border: none;
+    height: 2rem;
+    width: 2rem;
+}
+
+#footer{
+    border-top: 1px lightgrey solid;
+    color: white;
+    background-color: rgba(96, 48, 132, 0.8);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#footer i{
+    font-style: normal;
+}
+
+#footer i a{
+    text-decoration: none;
+    color: white;
+}
+
+#forEmptyField, #domain, #shortUrl, #qrcode, #download, #copy{
+    display: none;
+}
+

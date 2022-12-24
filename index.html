@@ -1,0 +1,192 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+	<title>Cross-Browser QRCode generator for Javascript</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+	<!-- CSS and javascript file only -->
+	<link href="style.css" rel="stylesheet"> 
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="qrcode.js"></script>
+</head>
+<body style="background-color: #fff2f0;">
+
+	<!-- header part -->
+	<div class="d-flex" id="header">
+		<div class="header1 p-2">
+			<picture>
+				<img src="https://www.demo.org.pk/wp-content/uploads/2020/03/demo-logo-hi-res-copy-1-e1584168425522.png" class="img-thumbnail">
+			</picture>
+		</div>
+		<div class="flex-grow-1 align-self-center header2 p-2 text-center"> 
+			<h3> Welcome to QR Generator </h3>
+		</div>
+	</div>
+	
+	
+	<!-- header 2 part -->
+	<div class="d-flex" style="background-color: #e67e07; color: white">
+		<div class="flex-grow-1 align-self-center header2 p-2"> 
+			<h6>
+                <span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-paper" viewBox="0 0 16 16">
+						<path d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2H4Zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6v-2.55Zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v5.417Zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267v2.55Zm13 .566v5.734l-4.778-2.867L15 7.383Zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083l6.965 4.18ZM1 13.116V7.383l4.778 2.867L1 13.117Z"/>
+					</svg>
+				</span>Email : shubhi@gmail.com
+            </h6>
+		</div>
+		<div class="d-flex p-2">
+			<h6>
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                </span>Contact : 9876543210, 9753186420
+            </h6> 
+		</div>
+	</div>
+
+	<!-- body part -->
+	<div id="qr_code" class="p-5">
+		<div class="container p-4">
+			<div>
+				<label class="form-label fw-bold" for="text"> URL </label>
+				<div class="input-group">
+					<input type="text" id="text" class="form-control" placeholder="Enter Long Url">
+					<span class="input-group-text">
+						<button class="btn btn-warning" onclick="makeCode()"> Generate </button>
+					</span>
+				</div>
+				<span id="forEmptyField" class="text-danger mt-1">Please Enter the Long URL.</span>
+				<span id="domain" class="text-danger mt-1">Please Enter URL starts with https://</span>
+			</div>
+			
+			<div class="d-flex mt-4">
+				<div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+				<div class="align-self-end">
+					<button id="download" class="download" onclick="downloadQR()">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+							<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+							<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+			<div class="input-group mt-5" id="shortUrlDiv">
+				<input type="text" id="shortUrl" class="form-control" readonly />
+  				<span class="input-group-text" id="copy">
+					<button class="copy" onclick="copyUrl()">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+							<path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+						</svg>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<div id="footer" class="p-1">
+		<div class="container-fluid">
+			<div class="row p-1 text-center">
+                <div class="text-center mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+                        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"/>
+                    </svg>
+                    <b> Designed by Shubhi Gupta.</b>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	
+<script type="text/javascript">
+	
+	var qrcode = new QRCode(document.getElementById("qrcode"), {
+		width : 100,
+		height : 100,
+		colorDark : '#de7f40',
+		colorLight: 'white'
+	});
+
+	function makeCode() {		
+		document.getElementById('forEmptyField').style.display = "none";
+		document.getElementById('domain').style.display = "none";
+		var elText = document.getElementById("text").value;
+
+		if(elText == ""){
+			document.getElementById('forEmptyField').style.display = "block";
+		}
+		else{
+			if(elText.startsWith("https://")){
+				qrcode.makeCode(elText);
+				shortUrl();
+				document.getElementById('qrcode').style.display = "block";
+				document.getElementById('download').style.display = "block";
+				document.getElementById('shortUrl').style.display = "block";
+				document.getElementById('copy').style.display = "block";
+			}
+			else{
+				document.getElementById('domain').style.display = "block";
+			}
+		}
+	}
+
+	$("#text").
+		on("blur", function () {
+			makeCode();
+		}).
+		on("keydown", function (e) {
+			if (e.keyCode == 13) {
+				makeCode();
+			}
+		});
+
+	function downloadQR() {
+        let url = document.querySelector('#qrcode').querySelector('img').src;
+		console.log(url);
+		var link = document.createElement("a");
+		link.download = 'qrcode.png';
+		link.href = url;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		delete link;
+    } 
+
+	function copyUrl(){
+		var copyText = document.getElementById('shortUrl');
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(copyText.value);
+	}
+	
+	function shortUrl(){
+			
+		var result = "";
+			
+		var myHeaders = new Headers();
+		myHeaders.append("apikey", "xaXXGWyYllGPWBIDdDWFhFtUNfeycc4D");
+
+		var raw = document.getElementById("text").value;
+
+		var requestOptions = {
+			method: 'POST',
+			redirect: 'follow',
+			headers: myHeaders,
+			body: raw
+		};
+
+		fetch("https://api.apilayer.com/short_url/hash", requestOptions)
+		.then(response => response.json())
+		// .then(result => console.log(result.short_url))
+		.then(result => {
+			document.getElementById("shortUrl").value = result.short_url
+		})
+		.catch(error => console.log('error', error));
+	}
+</script>
+</body>
